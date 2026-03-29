@@ -14,6 +14,10 @@ GRUB_FILE="/etc/default/grub"
 KERNEL_PRINTK_FILE="/etc/sysctl.d/20-quiet-printk.conf"
 GRUBD_FILE_10="/etc/grub.d/10_linux"
 
+# usermod not found in su 
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
+export PATH
+
 # Check if carplay user exists, exit if it doesn't.
 echo "Ensuring carplay user exists..."
 if ! id "$CARPLAY_USER" >/dev/null 2>&1; then
@@ -32,7 +36,8 @@ apt update && apt install -y -qq --no-install-recommends \
   fuse libfuse2t64 libnspr4 libnss3 \
   libatk1.0-0t64 libatk-bridge2.0-0t64 \
   libcups2t64 libcairo2 libgtk-3-0t64 \
-  libinput-tools wlr-randr libinput-bin
+  libinput-tools wlr-randr libinput-bin \
+  libasound2
 
 # Add carplay user to sudo group
 echo "Adding $CARPLAY_USER to sudo group..."
@@ -126,7 +131,7 @@ update-grub
 # more screen clutter removal
 echo "Clearing MOTD..."
 > /etc/motd
-rm /etc/update-motd.d/10-uname
+rm -f /etc/update-motd.d/10-uname
 
 # Create power monitor script
 echo "Creating power monitor script..."
