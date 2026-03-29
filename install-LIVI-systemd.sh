@@ -127,7 +127,7 @@ update-grub
 # more screen clutter removal
 echo "Clearing MOTD..."
 > /etc/motd
-rm /etc/update-motd.d/10-uname
+rm -f /etc/update-motd.d/10-uname
 
 # Create power monitor script
 echo "Creating power monitor script..."
