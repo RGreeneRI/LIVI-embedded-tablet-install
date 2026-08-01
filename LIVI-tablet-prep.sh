@@ -18,7 +18,7 @@ fi
 
 # Install missing dependencies
 apt update
-apt install sudo fuse3 libnspr4 libnss3 gstreamer1.0-libav
+apt install sudo fuse3 libnspr4 libnss3 gstreamer1.0-libav acpi
 
 # Add carplay user to sudo group
 echo "Adding $CARPLAY_USER to sudo group..."
