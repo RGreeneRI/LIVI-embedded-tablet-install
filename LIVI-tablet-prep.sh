@@ -18,7 +18,7 @@ fi
 
 # Install missing dependencies
 apt update
-apt install sudo fuse3 libnspr4 libnss3 gstreamer1.0-libav acpi
+apt install sudo fuse3 libnspr4 libnss3 gstreamer1.0-libav acpi curl
 
 # Add carplay user to sudo group
 echo "Adding $CARPLAY_USER to sudo group..."
@@ -85,13 +85,13 @@ while true; do
     if [[ "$STATUS" != *"on-line"* ]]; then
         # If not plugged in, initiate shutdown
         echo "AC adapter is unplugged."
-        if [[ $UPTIME_SECS -ge 300 ]]; then
+        if [[ $UPTIME_SECS -ge 60 ]]; then
             echo "Initiating shutdown in $SHUTDOWN_SECS seconds..."
             sleep $SHUTDOWN_SECS
             /sbin/shutdown -P now
             exit 0
         fi
-        echo "Uptime under 5 minutes, staying on in case you booted up unplugged."
+        echo "Uptime under 1 minute, staying on in case you booted up unplugged."
         echo "Disabling auto-shutdown."
         exit 0
     fi
