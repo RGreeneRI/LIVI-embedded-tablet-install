@@ -18,7 +18,7 @@ fi
 
 # Install missing dependencies
 apt update
-apt install sudo fuse3 libnspr4 libnss3 gstreamer1.0-libav acpi curl
+apt install sudo fuse3 libnspr4 libnss3 gstreamer1.0-libav acpi curl network-manager
 
 # Add carplay user to sudo group
 echo "Adding $CARPLAY_USER to sudo group..."
@@ -118,4 +118,12 @@ else
     echo "Cron job already exists."
 fi
 
-echo "Done setting up LIVI embedded tablet prep script!"
+echo 'Done setting up LIVI embedded tablet prep script!'
+echo 'Comment out everything in /etc/network/interfaces'
+echo 'to allow Network Manager to control all interfaces'
+echo 'Then you can use:'
+echo 'nmcli device wifi list ifname wl01'
+echo 'to list nearby Wi-Fis'
+echo 'and'
+echo 'nmcli device wifi connect "YourWiFiName" password "YourPassword" ifname wl01'
+echo 'to connect'
